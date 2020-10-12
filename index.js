@@ -14,6 +14,7 @@ const stripe = require("stripe")(process.env.STRIPE_SK);
 const reactFiles = path.join(__dirname, "./build");
 
 app.get("/", (req, res) => {
+  console.log(reactFiles);
   res.sendFile(path.join(reactFiles + "/index.html"));
 });
 
