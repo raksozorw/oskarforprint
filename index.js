@@ -18,6 +18,16 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
+app.get("/fail", (req, res) => {
+  console.log(reactFiles);
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
+app.get("/success", (req, res) => {
+  console.log(reactFiles);
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
+
 app.post("/create-checkout-session", async (req, res) => {
   console.log(req.body.data.items);
   console.log(req.body.data.customer);
