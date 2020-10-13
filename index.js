@@ -20,12 +20,12 @@ app.get("/", (req, res) => {
 
 app.get("/fail", (req, res) => {
   console.log(reactFiles);
-  res.sendFile(path.join(__dirname, "build", "index.html", "fail"));
+  res.sendFile(path.join(__dirname, "build", "index.html/fail", "fail"));
 });
 
 app.get("/success", (req, res) => {
   console.log(reactFiles);
-  res.sendFile(path.join(__dirname, "build", "index.html", "success"));
+  res.sendFile(path.join(__dirname, "build", "index.html/success"));
 });
 
 app.post("/create-checkout-session", async (req, res) => {
