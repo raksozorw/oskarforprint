@@ -14,18 +14,15 @@ const stripe = require("stripe")(process.env.STRIPE_SK);
 app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/", (req, res) => {
-  console.log(reactFiles);
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.get("/fail", (req, res) => {
-  console.log(reactFiles);
-  res.sendFile(path.join(__dirname, "build", "index.html/fail", "fail"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.get("/success", (req, res) => {
-  console.log(reactFiles);
-  res.sendFile(path.join(__dirname, "build", "index.html/success"));
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.post("/create-checkout-session", async (req, res) => {
