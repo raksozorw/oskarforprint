@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
-const apiPort = process.env.PORT;
+const apiPort = process.env.PORT || 3000;
 const path = require("path");
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,12 +11,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const stripe = require("stripe")(process.env.STRIPE_SK);
-const reactFiles = path.join(__dirname, "./build");
+app.use(express.static(path.join(__dirname, "build")));
 
 app.get("/", (req, res) => {
-  console.log("no");
-  // console.log(reactFiles);
-  // res.sendFile(path.join(reactFiles + "/index.html"));
+  console.log(reactFiles);
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.post("/create-checkout-session", async (req, res) => {
@@ -30,8 +29,8 @@ app.post("/create-checkout-session", async (req, res) => {
       price: item.sku,
     })),
     mode: "payment",
-    success_url: "https://example.com/success",
-    cancel_url: "https://example.com/cancel",
+    success_url: "https://oskar-for-print.herokuapp.com/success",
+    cancel_url: "https://oskar-for-print.herokuapp.com/fail",
   });
 
   res.json({ id: session.id });
@@ -49,4 +48,6 @@ app.post("/productList", async (req, res) => {
   res.send(data);
 });
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
+app.listen(apiPort || 3000, () =>
+  console.log(`Server running on port ${apiPort}`)
+);
